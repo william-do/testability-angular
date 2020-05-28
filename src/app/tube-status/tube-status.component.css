@@ -1,0 +1,13 @@
+ul { 
+  list-style-type: none;
+}
+
+li {
+  padding-top: 10pt;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+span.description {
+    margin-left: 2pt;
+    font-size: small;
+}

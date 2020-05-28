@@ -1,5 +1,5 @@
 <ul>
   <li *ngFor="let line of tubeLines$ | async">
-    {{ line.statusIndicator }} {{ line.id }} [{{ line.description }}]
+    {{ line.statusIndicator }} <b>{{ line.name }}</b> <span class="description">[{{ line.description }}]</span>
   </li>
 </ul>

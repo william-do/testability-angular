@@ -26,6 +26,7 @@ export class TubeStatusComponent implements OnInit {
   
           return {
             'id': line.id,
+            'name': line.name,
             'statusIndicator': statusIndicator,
             'description': description
           };
@@ -59,6 +60,7 @@ export class TubeStatusComponent implements OnInit {
 
 interface Line {
   id: string;
+  name: string;
   lineStatuses: LineStatus[];
 }
 
