@@ -39,7 +39,7 @@ export class TflApiService {
 
   constructor(private http: HttpClient, private statusIndicatorService: StatusIndicatorService) {}
 
-  downloadStatus(): Observable<object[]> {
+  downloadStatus(): Observable<DisplayableLine[]> {
     console.log('foo here');
     return this.http.get<Line[]>('https://api.tfl.gov.uk/Line/Mode/tube/Status').pipe(
       map(data => {
@@ -49,6 +49,7 @@ export class TflApiService {
   
           return {
             'id': line.id,
+            'name': line.name,
             'statusIndicator': statusIndicator,
             'description': description
           };
@@ -66,12 +67,12 @@ export class TflApiService {
   selector: 'app-tube-status',
   templateUrl: './tube-status.component.html',
   styleUrls: ['./tube-status.component.css'],
-  providers: [ StatusIndicatorService ]
+  providers: [ StatusIndicatorService, TflApiService ]
 })
 @Injectable()
 export class TubeStatusComponent implements OnInit {
 
-  tubeLines$: Observable<object[]>;
+  tubeLines$: Observable<DisplayableLine[]>;
 
   constructor(private tflApiService: TflApiService) {}
 
@@ -83,10 +84,17 @@ export class TubeStatusComponent implements OnInit {
 
 interface Line {
   id: string;
+  name: string;
   lineStatuses: LineStatus[];
 }
 
 interface LineStatus {
   statusSeverity: number;
   statusSeverityDescription: string;
+}
+
+interface DisplayableLine {
+  id: string;
+  statusIndicator: string;
+  description: string;
 }
